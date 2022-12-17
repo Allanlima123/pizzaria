@@ -3,6 +3,7 @@ import { atualizarCarrinho } from "./scripts/atualizarcarrinho/atualizarcarrinho
 import { preencheDadosDasPizzas } from "./scripts/preenchedadosdasPizzas/preenchedadosdasPizzas.js";
 import { formatoReal } from "./scripts/formato-real/formatoreal.js";
 import { preencheDadosModal } from "./scripts/modal/modal.js";
+import { abrirCarrinho, fecharCarrinho } from "./scripts/abrirefecharcarrinho/abrirefecharcarrinho.js";
 
 let modalKey = 0;
 
@@ -85,29 +86,8 @@ const adicionarNoCarrinho = () => {
         }
 
         fecharModal(seleciona)
-        abrirCarrinho()
+        abrirCarrinho(seleciona, cart)
         atualizarCarrinho(seleciona, cart)
-    })
-}
-
-const abrirCarrinho = () => {
-    if (cart.length > 0) {
-        seleciona('aside').classList.add('show')
-        seleciona('header').style.display = 'flex' // mostrar barra superior
-    }
-
-    seleciona('.menu-openner').addEventListener('click', () => {
-        if (cart.length > 0) {
-            seleciona('aside').classList.add('show')
-            seleciona('aside').style.left = '0'
-        }
-    })
-}
-
-const fecharCarrinho = () => {
-    seleciona('.menu-closer').addEventListener('click', () => {
-        seleciona('aside').style.left = '100vw' // usando 100vw ele ficara fora da tela
-        seleciona('header').style.display = 'flex'
     })
 }
 
@@ -145,7 +125,7 @@ mudarQuantidade()
 
 adicionarNoCarrinho()
 atualizarCarrinho(seleciona, cart)
-fecharCarrinho()
+fecharCarrinho(seleciona)
 finalizarCompra()
 
 export { seleciona };
